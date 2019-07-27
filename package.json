@@ -1,0 +1,27 @@
+{
+  "name": "instagram-crawler-api",
+  "version": "1.0.0",
+  "description": "Instagram crawler using Node.js with Puppeteer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frkdrgt/instagram-crawler-api.git"
+  },
+  "keywords": [
+    "instagram",
+    "puppeteer"
+  ],
+  "author": "Faruk Durgut",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frkdrgt/instagram-crawler-api/issues"
+  },
+  "homepage": "https://github.com/frkdrgt/instagram-crawler-api#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "puppeteer": "^1.19.0"
+  }
+}
