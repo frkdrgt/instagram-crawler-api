@@ -34,9 +34,13 @@ express()
       let postCount = parseInt(textContent.split(',').join(""));
 
       let maxItemsSize = req.params.count;
+
       let previousHeight;
       var media = new Set();
       let nodes = null;
+      await page.waitFor(1000);
+
+
       if(postCount < maxItemsSize){
         res.end("You can get "+ postCount +" pictures maximum");
         browser.close();
@@ -49,7 +53,7 @@ express()
             //Scroll page
             previousHeight = await page.evaluate("document.body.scrollHeight");
             await page.evaluate(`window.scrollTo(0, ${previousHeight})`);
-            await page.waitForFunction(`document.body.scrollHeight  > ${previousHeight}`);
+            //await page.waitForFunction(`document.body.scrollHeight  > ${previousHeight}`);
             await page.waitFor(1000);
 
 
