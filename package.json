@@ -23,7 +23,6 @@
   "homepage": "https://github.com/frkdrgt/instagram-crawler-api#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "puppeteer": "^1.19.0",
-    "puppeteer-autoscroll-down": "^0.1.1"
+    "puppeteer": "^1.19.0"
   }
 }

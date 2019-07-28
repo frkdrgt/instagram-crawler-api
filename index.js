@@ -7,7 +7,7 @@ express()
   .get("/user/:user/:count", (req, res) => {
     (async () => {
       const browser = await puppeteer.launch();
-      const page = await browser.newPage();
+      const page = await browser.newPage({ args: ['--no-sandbox', '--disable-setuid-sandbox']});
 
       await page.setExtraHTTPHeaders({
         "Accept-Language": "en-US"
