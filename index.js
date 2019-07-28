@@ -85,4 +85,7 @@ express()
       }
     })();
   })
+  .get("/",(req,res) => {
+    res.end("Homepage");
+  })
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
