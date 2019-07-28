@@ -6,8 +6,8 @@ const PORT = process.env.PORT || 5000;
 express()
   .get("/user/:user/:count", (req, res) => {
     (async () => {
-      const browser = await puppeteer.launch();
-      const page = await browser.newPage({ args: ['--no-sandbox', '--disable-setuid-sandbox']});
+      const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox']});
+      const page = await browser.newPage();
 
       await page.setExtraHTTPHeaders({
         "Accept-Language": "en-US"
