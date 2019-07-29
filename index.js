@@ -1,4 +1,4 @@
-var express = require("express");
+const express = require("express");
 const puppeteer = require("puppeteer");
 
 const PORT = process.env.PORT || 5000;
@@ -24,10 +24,7 @@ express()
       if (await page.$(`.dialog-404`)) {
         process.exit();
       }
-      
-      //await page.setViewport({ width: 800, height: 600 }); Not necessary
-
-
+    
       const textContent = await page.evaluate(() => document.querySelector('span.g47SY').textContent);
       //const innerText = await page.evaluate(() => document.querySelector('span.g47SY').innerText);  Another way to get post count
       
@@ -38,8 +35,9 @@ express()
       let previousHeight;
       var media = new Set();
       let nodes = null;
+      var urlDetails = []; //will change
+      
       await page.waitFor(1000);
-
 
       if(postCount < maxItemsSize){
         res.end("You can get "+ postCount +" pictures maximum");
@@ -63,7 +61,46 @@ express()
               );
               return [].map.call(images, img => img.src);
             });
+
+            //BEGIN TEST SECTION.
+            //
+            //
+            //This code will change after.
+
+            let urls = await page.evaluate(() => {
+              const images = document.querySelectorAll(
+                `div.v1Nh3 > a`
+              );
+              return [].map.call(images, img => img.href);
+            });
+
+
+            for(const imgUrl of urls){
+              console.log(imgUrl);
+              const page = await browser.newPage();
+              await page.setExtraHTTPHeaders({
+                "Accept-Language": "en-US"
+              });
+              await page.goto(imgUrl, {
+                waitUntil: 'networkidle0'
+              });
+
+              const data  = await page.evaluate(() => {
+                  return {
+                    post:{
+                      image: document.querySelector("div.KL4Bh img").getAttribute('src'),
+                      description: document.querySelector("div.C4VMK span").textContent,
+                      likeNumber : document.querySelector("div.Nm9Fw").textContent,
+                      multipleImage: !!document.querySelector("div.coreSpriteRightChevron")
+                    }
+                  }
+              });
+              
+              urlDetails.push(data);
+            }
+            //END TEST SECTION.
   
+
             nodes.forEach(element => {
               if (media.size < maxItemsSize) {
                 media.add(element);
@@ -82,7 +119,8 @@ express()
         items.forEach(url => {
           tmp.push({
             thumbnail_src: url,
-            accessibility_caption: ""
+            accessibility_caption: "",
+            posts: urlDetails // for test
           });
         });
         res.send(JSON.stringify(tmp));
