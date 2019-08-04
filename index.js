@@ -15,9 +15,8 @@ app.get("/:user", async (req, res) => {
     .catch(error => console.error(error));
   res.json(data.posts);
 });
-const server = app.listen(PORT, "127.0.0.1", () => {
-  const { address, port } = server.address();
-  console.log("Example app listening at http://%s:%s", address, port);
+const server = app.listen(PORT, () => {
+  console.log("app listening");
   server.setTimeout(500000);
 });
 //.listen(PORT, () => console.log(`Listening on ${PORT}`));
