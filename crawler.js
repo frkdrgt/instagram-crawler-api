@@ -48,7 +48,9 @@ const CrawlerInstagram = class {
   async getInfoProfile() {
     return this.page.evaluate(dom => {
       return {
-        numberPosts: document.querySelector(dom.numberPosts).innerText
+        numberPosts: document.querySelector(dom.numberPosts)
+        ? document.querySelector(dom.numberPosts).innerText
+        : null
       };
     }, dom);
   }
