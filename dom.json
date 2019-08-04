@@ -1,0 +1,11 @@
+{
+	"notExist": ".dialog-404",
+	"numberPosts": "span.g47SY",
+	"listPost": "div.v1Nh3 > a",
+	"likeNumber": "div.Nm9Fw",
+	"viewNumber": "div.HbPOm span",
+	"urlImage": "div.KL4Bh img",
+	"video": "div._5wCQW video",
+	"description": "div.C4VMK span",
+	"multipleImage": ".coreSpriteRightChevron"
+}
