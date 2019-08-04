@@ -12,7 +12,7 @@ const CrawlerInstagram = class {
 
   async start(userName, postLimit) {
     this.browser = await puppeteer.launch({
-      args: ["--lang=en-US", "--disk-cache-size=0"]
+      args: ["--lang=en-US", "--disk-cache-size=0",'--no-sandbox', '--disable-setuid-sandbox']
     });
 
     this.page = await this.browser.newPage();
