@@ -13,5 +13,5 @@ Use responsibly.
 
 
 ## Example
-
-> [https://morning-dusk-77870.herokuapp.com/user/instagram](https://morning-dusk-77870.herokuapp.com/user/instagram)
+It's free Heroku deploys and sometimes it crashes. I prefer to test on local
+> [https://morning-dusk-77870.herokuapp.com/user/pug_dell](https://morning-dusk-77870.herokuapp.com/user/pug_dell)
