@@ -12,14 +12,19 @@ const CrawlerInstagram = class {
 
   async start(userName, postLimit) {
     this.browser = await puppeteer.launch({
-      args: ["--lang=en-US", "--disk-cache-size=0",'--no-sandbox', '--disable-setuid-sandbox']
+      args: [
+        "--lang=en-US",
+        "--disk-cache-size=0",
+        "--no-sandbox",
+        "--disable-setuid-sandbox"
+      ]
     });
 
     this.page = await this.browser.newPage();
     await this.page.setExtraHTTPHeaders({
       "Accept-Language": "en-US"
     });
-    console.log(userName);
+
     await this.page.goto(`https://instagram.com/${userName}`, {
       waitUntil: "networkidle0"
     });
@@ -41,7 +46,7 @@ const CrawlerInstagram = class {
     }
     await this.browser.close();
 
-    return await this.dataProfile;
+    return this.dataProfile;
   }
 
   // Get info in profil
@@ -49,8 +54,8 @@ const CrawlerInstagram = class {
     return this.page.evaluate(dom => {
       return {
         numberPosts: document.querySelector(dom.numberPosts)
-        ? document.querySelector(dom.numberPosts).innerText
-        : null
+          ? document.querySelector(dom.numberPosts).innerText
+          : null
       };
     }, dom);
   }
@@ -69,7 +74,6 @@ const CrawlerInstagram = class {
     const listPostUrl = new Set();
 
     while (listPostUrl.size < Number(postLimit)) {
-      console.log(listPostUrl.size + " < " + postLimit);
       const listUrl = await this.page.$$eval(dom.listPost, list =>
         list.map(n => n.getAttribute("href"))
       );
@@ -90,13 +94,12 @@ const CrawlerInstagram = class {
     const listPost = [];
 
     for (const url of listPostUrl) {
-      console.log(url);
+      console.log("Url => " + url);
       const page = await this.browser.newPage();
 
       await page.goto(`https://instagram.com${url}`, {
         waitUntil: "networkidle0"
       });
-      
 
       const data = await page.evaluate(dom => {
         return {
@@ -135,15 +138,7 @@ const CrawlerInstagram = class {
     );
     return write.then(x => {
       console.log("File created.");
-      
     });
-    /*return writeFileAsync(
-			`${userName}.json`,
-			JSON.stringify(this.dataProfile, null, 2)
-		);*/
   }
 };
 module.exports = CrawlerInstagram;
-// Simple usage
-////const crawler = new CrawlerInstagram();
-////crawler.start("evrimagaci",4).catch(error => console.error(error));
