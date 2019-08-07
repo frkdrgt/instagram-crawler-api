@@ -14,5 +14,8 @@ app
       .catch(error => console.error("Hata " + error));
 
     res.json(data.posts);
-  })
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+  });
+  const server = app.listen(PORT, () => {	
+    console.log(`Listening on ${PORT}`);	
+    server.setTimeout(5000000); //Added for heroku
+  });
