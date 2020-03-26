@@ -1,6 +1,6 @@
 # Instagram Crawler API
 
-Crawl Instagram images ande videos using Puppeter library. It creates a json file.
+Crawl Instagram images and videos using Puppeter library. It creates a json file.
 Use responsibly.
 
 ## Installation
